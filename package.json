@@ -1,0 +1,23 @@
+{
+  "name": "nodejs-simple-helloworld",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./source/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/particle4dev/nodejs-simple-helloworld.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/particle4dev/nodejs-simple-helloworld/issues"
+  },
+  "homepage": "https://github.com/particle4dev/nodejs-simple-helloworld#readme",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}
