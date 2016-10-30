@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 var appId = Math.floor((Math.random() * 1000) + 1);
 let connectedMongo = false;
 
-export function connect(uri, options) {
+function connect(uri, options) {
   // http://mongodb.github.io/node-mongodb-native/2.0/api/Server.html#connections
   options.server = options.server ? options.server : {
     socketOptions: { keepAlive: 1 },
