@@ -11,7 +11,7 @@
     "type": "git",
     "url": "git+https://github.com/particle4dev/nodejs-simple-helloworld.git"
   },
-  "author": "",
+  "author": "Hoang Nam <particle4dev@gmail.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/particle4dev/nodejs-simple-helloworld/issues"
