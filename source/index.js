@@ -1,10 +1,54 @@
 var express = require('express');
 var app = express();
+var mongoose = require('mongoose');
 
 var appId = Math.floor((Math.random() * 1000) + 1);
+let connectedMongo = false;
+
+export function connect(uri, options) {
+  // http://mongodb.github.io/node-mongodb-native/2.0/api/Server.html#connections
+  options.server = options.server ? options.server : {
+    socketOptions: { keepAlive: 1 },
+  };
+  options.auto_reconnect = true;
+  const connect = mongoose.createConnection(uri, options);
+
+  // CONNECTION EVENTS
+  // When successfully connected
+  connect.on('connected', () => {
+    console.log(`Mongoose default connection open to ${uri}`);
+    connectedMongo = true;
+  });
+
+  // If the connection throws an error
+  connect.on('error', (err) => {
+    console.error(`Failed to connect to DB ${uri} on startup ${err.message}`);
+    connectedMongo = false;
+  });
+
+  // When the connection is disconnected
+  connect.on('disconnected', () => {
+    console.warn(`Mongoose default connection to DB : ${uri} disconnected`);
+    connectedMongo = false;
+  });
+
+  const gracefulExit = () => {
+    connect.close(() => {
+      console.log(`Mongoose default connection with DB : ${uri} is disconnected through app termination`);
+      connectedMongo = false;
+      process.exit(0);
+    });
+  };
+  // If the Node process ends, close the Mongoose connection
+  process.on('SIGINT', gracefulExit).on('SIGTERM', gracefulExit);
+
+  return connect;
+}
+
+connect(`mongodb://mongo:27017/tests`, {});
 
 app.get('/', function (req, res) {
-  res.send('Hello World! appId=' + appId);
+  res.send('Hello World! appId=' + appId + ',connectedMongo=' + connectedMongo.toString());
 });
 
 app.listen(3000, function () {
