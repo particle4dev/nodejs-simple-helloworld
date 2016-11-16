@@ -1,0 +1,39 @@
+version: "2"
+
+services:
+  mongo:
+    image: mongo:3.2
+    env_file:
+      - ./common.env
+    networks:
+      - back-tier
+
+  redis:
+    image: redis:3.2.0
+    env_file:
+      - ./common.env
+    networks:
+      - back-tier
+
+  nodejs-simple-helloworld:
+    build:
+      context: ../
+      dockerfile: Dockerfile
+    env_file:
+      - ./common.env
+    environment:
+      - REDIS=redis://redis:6379
+    volumes:
+      - ../source:/usr/src/app/source
+    networks:
+      - back-tier
+    depends_on:
+      - mongo
+      - redis
+    # command: bash -c "echo 'welcome'; tail -f /dev/null"
+
+networks:
+  back-tier:
+  # front-tier:
+# volumes:
+  # db-data:
