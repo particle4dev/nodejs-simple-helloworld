@@ -1,7 +1,9 @@
 var express = require('express');
 var app = express();
 var mongoose = require('mongoose');
+var Redis = require('redis');
 
+let redis = null;
 var appId = Math.floor((Math.random() * 1000) + 1);
 let connectedMongo = false;
 
@@ -46,6 +48,24 @@ function connect(uri, options) {
 }
 
 connect(`mongodb://mongo:27017/tests`, {});
+
+// try connect to redis
+try {
+  redis = Redis.createClient(`${ process.env.REDIS }`);
+  redis.on("connect", function () {
+    console.log(`redis default connection open to ${process.env.REDIS}`);
+  });
+}
+catch (e) {
+  console.error(e.message);
+}
+
+process.on('exit', function (code) {
+  if (redis && redis.end) {
+    redis.end();
+  }
+  redis = null;
+});
 
 app.get('/', function (req, res) {
   res.send('Hello World! appId=' + appId + ',connectedMongo=' + connectedMongo.toString());
