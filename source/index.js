@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 var Redis = require('redis');
 
 let redis = null;
+let connectedRedis = false;
 var appId = Math.floor((Math.random() * 1000) + 1);
 let connectedMongo = false;
 
@@ -53,10 +54,12 @@ connect(`mongodb://mongo:27017/tests`, {});
 try {
   redis = Redis.createClient(`${ process.env.REDIS }`);
   redis.on("connect", function () {
+    connectedRedis = true;
     console.log(`redis default connection open to ${process.env.REDIS}`);
   });
 }
 catch (e) {
+  connectedRedis = false;
   console.error(e.message);
 }
 
@@ -64,11 +67,12 @@ process.on('exit', function (code) {
   if (redis && redis.end) {
     redis.end();
   }
+  connectedRedis = false;
   redis = null;
 });
 
 app.get('/', function (req, res) {
-  res.send('Hello World! appId=' + appId + ',connectedMongo=' + connectedMongo.toString());
+  res.send('Hello World! appId=' + appId + ',connectedMongo=' + connectedMongo.toString() + 'connectedRedis=' + connectedRedis.toString());
 });
 
 app.listen(3000, function () {
