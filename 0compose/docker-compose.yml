@@ -23,6 +23,7 @@ services:
       - ./common.env
     environment:
       - REDIS=redis://redis:6379
+      - MONGO=mongodb://mongo:27017/tests
     volumes:
       - ../source:/usr/src/app/source
     networks:
