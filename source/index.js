@@ -48,7 +48,7 @@ function connect(uri, options) {
   return connect;
 }
 
-connect(`mongodb://mongo:27017/tests`, {});
+connect(`${ process.env.MONGO }`, {});
 
 // try connect to redis
 try {
