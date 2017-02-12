@@ -4,6 +4,8 @@
 machine:
   services:
     - docker
+  node:
+    version: 6.9.5
 
 dependencies:
   override:
