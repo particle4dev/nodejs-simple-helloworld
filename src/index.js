@@ -1,11 +1,11 @@
-var express = require('express');
-var app = express();
-var mongoose = require('mongoose');
-var Redis = require('redis');
+const express = require('express');
+const app = express();
+const mongoose = require('mongoose');
+const Redis = require('redis');
 
 let redis = null;
 let connectedRedis = false;
-var appId = Math.floor((Math.random() * 1000) + 1);
+const appId = Math.floor((Math.random() * 1000) + 1);
 let connectedMongo = false;
 
 function connect(uri, options) {
@@ -48,22 +48,21 @@ function connect(uri, options) {
   return connect;
 }
 
-connect(`${ process.env.MONGO }`, {});
+connect(`${process.env.MONGO}`, {});
 
 // try connect to redis
 try {
-  redis = Redis.createClient(`${ process.env.REDIS }`);
-  redis.on("connect", function () {
+  redis = Redis.createClient(`${process.env.REDIS}`);
+  redis.on('connect', () => {
     connectedRedis = true;
     console.log(`redis default connection open to ${process.env.REDIS}`);
   });
-}
-catch (e) {
+} catch (e) {
   connectedRedis = false;
   console.error(e.message);
 }
 
-process.on('exit', function (code) {
+process.on('exit', (code) => {
   if (redis && redis.end) {
     redis.end();
   }
@@ -71,10 +70,10 @@ process.on('exit', function (code) {
   redis = null;
 });
 
-app.get('/', function (req, res) {
-  res.send('Hello World! appId=' + appId + ',connectedMongo=' + connectedMongo.toString() + 'connectedRedis=' + connectedRedis.toString());
+app.get('/', (req, res) => {
+  res.send(`Hello World! appId=${appId},connectedMongo=${connectedMongo.toString()}connectedRedis=${connectedRedis.toString()}`);
 });
 
-app.listen(3000, function () {
+app.listen(3000, () => {
   console.log('Example app listening on port 3000!');
 });
