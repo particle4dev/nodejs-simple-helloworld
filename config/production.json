@@ -5,9 +5,6 @@
   "db": {
     "mongo": {
       "options": {}
-    },
-    "redis": {
-      "start": true
     }
   },
   "cluster": false,

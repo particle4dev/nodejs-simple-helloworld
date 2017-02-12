@@ -1,0 +1,7 @@
+apps:
+  - script   : './build/index.js'
+    name     : 'SIMPLE-NODE'
+    exec_mode: 'cluster'
+    instances: 1
+    env_production:
+      NODE_ENV: production

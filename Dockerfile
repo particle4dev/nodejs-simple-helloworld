@@ -1,5 +1,5 @@
 FROM node:6.9.5
-MAINTAINER MCDataPlus "particle4dev@gmail.com"
+MAINTAINER ANT_SOLUTIONS "particle4dev@gmail.com"
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -10,7 +10,7 @@ ENV PATH "$HOME/.yarn/bin:$PATH"
 # use changes to package.json to force Docker not to use the cache
 # when we change our application's nodejs dependencies:
 ADD package.json yarn.lock /tmp/
-RUN $HOME/.yarn/bin/yarn cache clean
+RUN $HOME/.yarn/bin/yarn cache clean && $HOME/.yarn/bin/yarn global add pm2
 RUN cd /tmp && $HOME/.yarn/bin/yarn install --pure-lockfile
 
 # Create app directory
@@ -21,6 +21,9 @@ WORKDIR /usr/src/app
 COPY . /usr/src/app/
 RUN cp -a /tmp/node_modules /usr/src/app/
 
-EXPOSE 3000
+# Build
+RUN $HOME/.yarn/bin/yarn run build
 
-CMD ["npm", "start"]
+EXPOSE 4000
+
+CMD ['npm', 'run', 'serve']
