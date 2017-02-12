@@ -3,13 +3,8 @@ version: "2"
 services:
   mongo:
     image: mongo:3.2
-    env_file:
-      - ./common.env
-    networks:
-      - back-tier
-
-  redis:
-    image: redis:3.2.0
+    ports:
+      - 27017:27017
     env_file:
       - ./common.env
     networks:
@@ -38,12 +33,13 @@ services:
       - ../nodemon.json:/usr/src/app/nodemon.json
       - ../Dockerfile:/usr/src/app/Dockerfile
       - ../README.md:/usr/src/app/README.md
+      - ../logs:/usr/src/app/logs
+      - ../config:/usr/src/app/config
       - ../src:/usr/src/app/src
     networks:
       - back-tier
     depends_on:
       - mongo
-      - redis
     # command: bash -c "echo 'welcome'; tail -f /dev/null"
 
 networks:

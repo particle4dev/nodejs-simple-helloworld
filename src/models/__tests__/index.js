@@ -1,0 +1,1 @@
+require('./todo-schema.tests');
