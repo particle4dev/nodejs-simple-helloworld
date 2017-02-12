@@ -1,0 +1,16 @@
+#
+#
+#
+machine:
+  services:
+    - docker
+
+dependencies:
+  override:
+    - yarn
+  cache_directories:
+    - ~/.cache/yarn
+
+test:
+  override:
+    - yarn test
