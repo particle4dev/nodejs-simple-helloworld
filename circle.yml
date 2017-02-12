@@ -29,9 +29,7 @@ deployment:
   prod:
     branch: master
     commands:
-      - VERSION="latest"
       - docker build --file ./Dockerfile -t nodejs-simple-helloworld .
-      - VERSION=`git describe --abbrev=0 --tags`
-      - docker tag nodejs-simple-helloworld:latest 073861455897.dkr.ecr.ap-northeast-1.amazonaws.com/nodejs-simple-helloworld:$VERSION
+      - docker tag nodejs-simple-helloworld:latest 073861455897.dkr.ecr.ap-northeast-1.amazonaws.com/nodejs-simple-helloworld:$CIRCLE_SHA1
       - chmod +x ./0circleci-deployment/deploy.sh
-      - ./0circleci-deployment/deploy.sh $VERSION
+      - ./0circleci-deployment/deploy.sh
