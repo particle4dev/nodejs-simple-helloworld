@@ -15,3 +15,14 @@
 
   - https://discuss.circleci.com/t/using-mongodb-3-0/527/3
 
+### How to deploy code to ECR
+
+  - https://github.com/circleci/go-ecs-ecr
+  - https://github.com/circleci/circle-ecs
+
+### Build local
+
+```
+docker build --file ./Dockerfile -t nodejs-simple-helloworld .
+docker run -d nodejs-simple-helloworld tail -f /dev/null
+```
