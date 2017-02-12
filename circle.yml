@@ -31,5 +31,5 @@ deployment:
     commands:
       - docker build --file ./Dockerfile -t nodejs-simple-helloworld .
       - docker tag nodejs-simple-helloworld:latest 073861455897.dkr.ecr.ap-northeast-1.amazonaws.com/nodejs-simple-helloworld:$CIRCLE_SHA1
-      - chmox +x ./0circleci-deployment/deploy.sh
+      - chmod +x ./0circleci-deployment/deploy.sh
       - ./0circleci-deployment/deploy.sh
