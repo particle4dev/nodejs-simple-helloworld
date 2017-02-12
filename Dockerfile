@@ -1,4 +1,4 @@
-FROM node:6.7.0
+FROM node:6.9.5
 MAINTAINER MCDataPlus "particle4dev@gmail.com"
 
 ENV DEBIAN_FRONTEND noninteractive
