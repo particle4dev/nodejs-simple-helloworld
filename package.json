@@ -10,6 +10,7 @@
     "lint:fix": "eslint --fix --config=./.eslintrc src",
     "start": "NODE_ENV=development nodemon ./src/app.js --exec \"eslint --fix --config=./.eslintrc src & babel-node\"",
     "serve": "NODE_ENV=production node ./build/app.js",
+    "test": "npm run test:tape",
     "test:tape": "NODE_ENV=tests ./node_modules/.bin/tape -r babel-register ./src/**/__tests__/**/index.js | tap-notify | tap-diff",
     "test:watch": "nodemon --watch src -q -x 'npm run test:tape'"
   },
