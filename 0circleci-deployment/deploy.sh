@@ -56,6 +56,9 @@ deploy_cluster() {
     echo "Error updating service."
     return 1
   fi
+
+  echo "Deployed!"
+  return 0
 }
 
 configure_aws_cli

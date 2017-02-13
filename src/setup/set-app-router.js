@@ -9,7 +9,7 @@ export default function setAppRouter(app) {
   const VERSIONS = { 'Version 0': 'v0', 'Version 1': 'v1' };
 
   app.get('/', (req, res) => {
-    res.send('Hello world 23\n');
+    res.send('Hello world 321\n');
   });
 
   app.get('/api', function (req, res) {
