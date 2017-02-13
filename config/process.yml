@@ -1,5 +1,5 @@
 apps:
-  - script   : './build/index.js'
+  - script   : './build/app.js'
     name     : 'SIMPLE-NODE'
     exec_mode: 'cluster'
     instances: 1

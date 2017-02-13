@@ -4,6 +4,7 @@
   },
   "db": {
     "mongo": {
+      "uri": "mongodb://stg.mongo.local.kinkan.works:27017/tests",
       "options": {}
     }
   },
