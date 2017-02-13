@@ -28,6 +28,5 @@ export default function () {
   }).defaults({});
   if (env === 'production') {
     nconf.set('db:mongo:uri', nconf.get('MONGO_URL'));
-    nconf.set('db:redis:uri', nconf.get('REDIS_URL'));
   }
 }

@@ -24,6 +24,16 @@
 
   - https://circleci.com/docs/docker/#caching-docker-layers
 
+### How to update ECS
+
+  - https://gist.github.com/zacharyclaysmith/6691bcd8ed2fb73db77a
+  - https://github.com/circleci/go-ecs-ecr/blob/master/deploy.sh
+  - https://github.com/circleci/circle-ecs/blob/master/deploy.sh
+  - https://github.com/circleci/go-ecs-ecr/blob/master/deploy.sh
+  - https://circleci.com/docs/continuous-deployment-with-aws-ec2-container-service/
+  - https://circleci.com/blog/circleci-aws-ecrecs/
+  - http://www.savvyclutch.com/continuous-deployment-to-aws-ecs-and-circle-ci/
+
 ### Build local
 
 ```
