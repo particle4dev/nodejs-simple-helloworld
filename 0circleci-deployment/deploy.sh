@@ -27,7 +27,8 @@ make_task_def(){
           "containerPort": 4000,
           "hostPort": 80
         }
-      ]
+      ],
+      "command": ["npm","run","serve"]
     }
   ]'
 
